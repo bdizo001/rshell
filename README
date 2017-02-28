@@ -2,5 +2,5 @@ Brief Overview:
     This project is a simulation of a bash shell terminal. We begun by prompting the user for input commands (ie "$"). The user input was then sorted into a string and then we parsed that string and created our Command objects. From there, we called our execute function on the Command objects using execvp. After that, the user is prompted for more input. This continues until the user exits the terminal.
 
 Known Bugs:
-    According to our testing, the terminal works with single commands. However, we run into problems when linking multiple commands using the connectors. When parsing multiple commands, we also ran into segmentation faults.  
-    In addition, "exit" does not make our shell terminate, so the user must exit using CTRL+C.
+    According to our testing, the terminal works with most single commands. However, we run into problems when linking multiple commands using the connectors. When parsing multiple commands, we also ran into segmentation faults.  
+    
