@@ -2,16 +2,17 @@
 #define PARSE_H
 
 #include <cstring>
+#include <cctype>
 
 #include "command.h"
 using namespace std;
 
-void parse(string userInput, vector<Command*> &vec){
+void parse(string userInput, vector<Command*> &vec, char** args){
     //break string at the connectors
     vector<string> cmd_strings;
     string temp;
     int start = 0;
-    for(int i = 0; i < userInput.size(); ++i){
+    for(unsigned i = 0; i < userInput.size(); ++i){
         if(userInput.at(i) == ';'){
             temp = userInput.substr(start, i-start+1);
             if(i != userInput.size()-1){
@@ -50,15 +51,17 @@ void parse(string userInput, vector<Command*> &vec){
     }
 
     //convert to cstring, fill Command objects
-    char* args[100];
     char connector;
-    for(int i = 0; i < cmd_strings.size(); ++i){
+    for(unsigned i = 0; i < cmd_strings.size(); ++i){
+        //grab connector
         if( cmd_strings.at(i).at(cmd_strings.size()-1) == ' '){
-            connector = cmd_strings.at(i).at(cmd_strings.size()-2);  
+            connector = cmd_strings.at(i).at(cmd_strings.at(i).size()-2);  
         }
         else{
-            connector = cmd_strings.at(i).at(cmd_strings.size()-1);
+            connector = cmd_strings.at(i).at(cmd_strings.at(i).size()-1);
         }
+        //
+        //separate into tokens
         char* current = (char*)cmd_strings.at(i).c_str();
         char * pch;
         int index = 0;
@@ -70,6 +73,7 @@ void parse(string userInput, vector<Command*> &vec){
         }
         args[index] = NULL;        
 
+        //create command object, populate command vector
         Command* obj = new Command(args[0], args, connector);             
         vec.push_back(obj);
     }
