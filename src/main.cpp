@@ -24,6 +24,7 @@ int main(){
 
         //parse userinput into Command objects
         vector<Command*> command_vector;
+        char* args[100];
         parse(userInput, command_vector, args);
 
         //execute commands
