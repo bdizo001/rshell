@@ -11,7 +11,7 @@ using namespace std;
 
 //uses fork, execvp, wait to run commands encapsulated in Command objects
 //returns 0 if failed to run command, 1 if successfully run command
-int execute(Command* cmd){
+bool execute(Command* cmd){
     if(strcmp(cmd->getCommand(), "exit") == 0){
         exit(1);
     }
