@@ -1,6 +1,20 @@
 Brief Overview:
-    This project is a simulation of a bash shell terminal. We begun by prompting the user for input commands (ie "$"). The user input was then sorted into a string and then we parsed that string and created our Command objects. From there, we called our execute function on the Command objects using execvp. After that, the user is prompted for more input. This continues until the user exits the terminal.
+    This project is a simulation of a bash shell terminal. The program begins by prompting the user for input commands (ie "$"). The user input is then sorted into a string and then parsed into c-strings that are used to populate a vector of Command objects. From there, our execute function is called on the Command objects using system calls execvp, fork, and wait. After all commands in the vector are executed, the user is once again prompted for input. This process continues until the user exits the terminal with "exit".
+
+Installation:
+In order to install and run this shell on your machine, open a terminal and run the following commands:
+	1. git clone https://github.com/bdizo001/rshell.git
+	2. cd rshell
+	3. git checkout hw3
+	4. make
+	5. bin/rshell
+
+Features:
+-Supports single bash commands such as echo, ls, mkdir, and rm with their respective flags.
+-The prompt for the user includes their user name and host name. 
+-Implements in-line comments using the '#' symbol.
+-Use command "exit" to terminate the shell.
+
 
 Known Bugs:
-    According to our testing, the terminal works with most single commands. However, we run into problems when linking multiple commands using the connectors. When parsing multiple commands, we also ran into segmentation faults.  
-    
+-Multiple commands linked with connectors such as "&&" and "||" or ';' do not work properly.
