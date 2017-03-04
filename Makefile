@@ -1,5 +1,5 @@
 all:
-	g++ -Wall -Werror -pedantic -ansi main.cpp
+	g++ -Wall -Werror -pedantic -ansi src/main.cpp
 	
 clean:
 	rm a.out
