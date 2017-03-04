@@ -1,12 +1,36 @@
 #ifndef PARSE_H
 #define PARSE_H
 
+#include <cstddef>
 #include <cstring>
 #include <cctype>
+#include <string>
 
 #include "command.h"
 using namespace std;
 
+//takes in userInput string and removes first '#' found and all characters after
+string removeComments(string str){
+    //find first #
+    size_t hashPos = str.find("#");
+    
+    //remove all at and after #
+    string returnString;
+    if(hashPos != string::npos){
+        //# found, erase at/after hashPos
+        returnString = str.erase(hashPos);
+    }
+    else if(hashPos == string::npos){
+        //no # found, return original string
+        returnString = str;
+    }
+    
+    return returnString;
+}
+
+//takes filtered userinput string, separate into strings that each represent a single command
+//convert each command string into cstrings
+//create Command objects using cstrings, push onto vec
 void parse(string userInput, vector<Command*> &vec, char** args){
     //break string at the connectors
     vector<string> cmd_strings;
@@ -54,16 +78,19 @@ void parse(string userInput, vector<Command*> &vec, char** args){
     char connector;
     for(unsigned i = 0; i < cmd_strings.size(); ++i){
         //grab connector
-        if( cmd_strings.at(i).at(cmd_strings.size()-1) == ' '){
-            connector = cmd_strings.at(i).at(cmd_strings.at(i).size()-2);  
+        for(unsigned k = 0; k < cmd_strings.at(i).size(); ++k){
+            if(cmd_strings.at(i).at(k) == ';'
+                || cmd_strings.at(i).at(k) == '|'
+                || cmd_strings.at(i).at(k) == '&'){
+                connector = cmd_strings.at(i).at(k);
+            }
         }
-        else{
-            connector = cmd_strings.at(i).at(cmd_strings.at(i).size()-1);
-        }
-        //
-        //separate into tokens
+            
+        //convert into cstring
         char* current = (char*)cmd_strings.at(i).c_str();
-        char * pch;
+        
+        //separate into tokens
+        char* pch;
         int index = 0;
         pch = strtok(current, " ;&|");
         while(pch != NULL){
