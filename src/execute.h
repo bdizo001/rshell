@@ -55,7 +55,43 @@ void executeAll(vector<Command*> cmd_list){
     bool lastSuccess = true;       
  
     for(unsigned i = 0; i < cmd_list.size(); ++i){
-        if(lastConnector == ';'){
+        if(strcmp(cmd_list.at(i)->getCommand(), "test") == 0){
+            struct stat buf;
+            if(stat(cmd_list.at(i)->getArguments()[2], &buf) == -1){
+                //failed
+                lastSuccess = false;
+                cout << "(FALSE)" << endl;
+            }
+            else{ //stat succeeded
+                lastSuccess = true;
+                if(strcmp(cmd_list.at(i)->getArguments()[1], "-e") == 0){
+                    if(S_ISREG(buf.st_mode) || S_ISDIR(buf.st_mode)){
+                        //true
+                        cout << "(TRUE)" << endl;
+                    }
+                    else{
+                        cout << "(FALSE)" << endl;
+                    }
+                } 
+                else if(strcmp(cmd_list.at(i)->getArguments()[1], "-f") == 0){
+                    if(S_ISREG(buf.st_mode)){
+                        cout << "(TRUE)" << endl;
+                    }
+                    else{
+                        cout << "(FALSE)" << endl;
+                    }
+                }
+                else if(strcmp(cmd_list.at(i)->getArguments()[1], "-d") == 0){
+                    if(S_ISDIR(buf.st_mode)){
+                        cout << "(TRUE)" << endl;
+                    }
+                    else{
+                        cout << "(FALSE)" << endl;
+                    }
+                }
+            }
+        }
+        else if(lastConnector == ';'){
             lastSuccess = execute(cmd_list.at(i));
         }
 
