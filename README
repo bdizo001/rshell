@@ -7,7 +7,7 @@ In order to install and run this shell on your machine, open a terminal and run 
 	2. cd rshell
 	3. git checkout hw3
 	4. make
-	5. bin/rshell
+	5. ./a.out
 
 Features:
 -Supports single bash commands such as echo, ls, mkdir, and rm with their respective flags.
