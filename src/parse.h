@@ -28,6 +28,18 @@ string removeComments(string str){
     return returnString;
 }
 
+//finds [] operators and replaces with "test" at the front
+void replaceBrackets(vector<string> &vec){
+    for(unsigned i = 0; i < vec.size(); ++i){
+        unsigned k;
+        for(k = 0; k < vec.at(i).size(); ++k){
+            if(vec.at(i).at(k) == ']'){
+                vec.at(i) = "test " + vec.at(i).substr(1, k-1);
+            }
+        }
+    }
+}
+
 //takes filtered userinput string, separate into strings that each represent a single command
 //convert each command string into cstrings
 //create Command objects using cstrings, push onto vec
@@ -74,6 +86,9 @@ void parse(string userInput, vector<Command*> &vec, char** args){
         } 
     }
 
+    //replace brackets with "test"
+    replaceBrackets(cmd_strings);
+    
     //convert to cstring, fill Command objects
     char connector;
     for(unsigned i = 0; i < cmd_strings.size(); ++i){
