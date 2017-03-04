@@ -5,7 +5,8 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <sys/types.h>
-#include <sys/wait.h>
+#include <sys/stat.h>
+#include <sys/wait.h> 
 #include <cstdlib>
 using namespace std;
 
