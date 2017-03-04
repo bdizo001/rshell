@@ -14,6 +14,7 @@ Features:
 -The prompt for the user includes their user name and host name. 
 -Implements in-line comments using the '#' symbol.
 -Use command "exit" to terminate the shell.
+-Supports the "test" command with flags -e, -f, and -d. Also interchangeable with the bracket operators. 
 
 
 Known Bugs:
