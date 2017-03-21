@@ -11,11 +11,9 @@ In order to install and run this shell on your machine, open a terminal and run 
 
 Features:
 -Supports single bash commands such as echo, ls, mkdir, and rm with their respective flags.
+-Supports multiple commands linked with ;, &&, || connectors
 -The prompt for the user includes their user name and host name. 
 -Implements in-line comments using the '#' symbol.
 -Use command "exit" to terminate the shell.
 -Supports the "test" command with flags -e, -f, and -d. Also interchangeable with the bracket operators. 
-
-
-Known Bugs:
--Multiple commands linked with connectors such as "&&" and "||" or ';' do not work properly.
+-Supports the precedence operator () and the redirection operators.
